@@ -17,9 +17,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class LoginUserTest {
-    private String name = "Max88888111ddddddsssssss11185555555555555855333";
+    private String name = "Max88888118888185555555555555855333";
     private String password = "qwert77777777777y333";
-    private String email = "Max99991111kkkkkkkkk9999999@ya.ru";
+    private String email = "Max99991999999hhh999999@ya.ru";
     private static UserClient userClient;
     private String token;
     private static UserDto userDto;
@@ -59,6 +59,7 @@ public class LoginUserTest {
     public void loginUserNotValid() {
         response = userClient.create(userDto);
         token = response.path("accessToken");
+        System.out.println(token);
         loginClient = new LoginClient(new RestAssuredClient());
         loginDto = new LoginDto(email+1, password);
         boolean isLogin = loginClient.login(loginDto)

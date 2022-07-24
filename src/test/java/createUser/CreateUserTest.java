@@ -13,9 +13,9 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.Assert.assertTrue;
 
 public class CreateUserTest {
-    private String name = "Max88888111ddddddsssssss11185555555555555855333";
+    private String name = "Max88888hhhhhh1185555555555555855333";
     private String password = "qwert77777777777y333";
-    private String email = "Max99991111kkkkkkkkk9999999@ya.ru";
+    private String email = "Max9999lllllll99999@ya.ru";
     private static UserClient userClient;
     private String token;
     public static UserDto userDto;
