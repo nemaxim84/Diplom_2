@@ -1,9 +1,9 @@
 package dto;
 
 public class UserDto {
-private String name;
-private String email;
-private String password;
+    private String name;
+    private String email;
+    private String password;
 
     public UserDto(String name, String email, String password) {
         this.name = name;

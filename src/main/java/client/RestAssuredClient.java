@@ -33,6 +33,14 @@ public class RestAssuredClient {
                 .when()
                 .post(path, pathParams);
     }
+    public <T> Response post(String token, String path, T body, Object... pathParams) {
+        return given()
+                .spec(getRequestSpecification())
+                .auth().oauth2(token)
+                .body(body)
+                .when()
+                .post(path, pathParams);
+    }
 
     public Response delete(String token, String path, Object... pathParams) {
         return given()
@@ -42,10 +50,19 @@ public class RestAssuredClient {
                 .delete(path, pathParams);
     }
 
-    public Response get(String path, Object... pathParams) {
+    public Response get(String token, String path, Object... pathParams) {
         return given()
                 .spec(getRequestSpecification())
+                .auth().oauth2(token)
                 .when()
                 .get(path, pathParams);
+    }
+    public  <T> Response patch(String token, String path, T body, Object... pathParams) {
+        return given()
+                .spec(getRequestSpecification())
+                .auth().oauth2(token)
+                .body(body)
+                .when()
+                .patch(path, pathParams);
     }
 }

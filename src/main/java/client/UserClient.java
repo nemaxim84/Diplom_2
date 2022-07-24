@@ -9,11 +9,6 @@ public class UserClient {
     public UserClient(RestAssuredClient restAssuredClient) {
         this.restAssuredClient = restAssuredClient;
     }
-    public String tokenValid (UserDto userDto){
-        return restAssuredClient.post("auth/register", userDto).then()
-                .extract()
-                .path("accessToken");
-    }
 
     public Response create(UserDto userDto) {
         return restAssuredClient.post("auth/register", userDto);
@@ -26,5 +21,7 @@ public class UserClient {
                 .extract()
                 .path("success");
     }
-
+    public Response patch(String token, UserDto userDto) {
+        return restAssuredClient.patch(token, "auth/user", userDto);
+    }
 }
