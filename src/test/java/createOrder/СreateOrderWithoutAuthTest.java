@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.apache.http.HttpStatus.SC_OK;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class СreateOrderWithoutAuthTest {
@@ -39,9 +40,9 @@ public class СreateOrderWithoutAuthTest {
     public void createOrderWithoutAuth() {
         response = orderClient.create("",orderDto);
         boolean isCreate = response
-                .then().statusCode(SC_OK)
+                .then()
                 .extract()
                 .path("success");
-        assertTrue(isCreate);
+        assertFalse(isCreate);
     }
 }
