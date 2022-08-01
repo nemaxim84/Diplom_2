@@ -2,26 +2,24 @@ package client;
 
 import dto.UserDto;
 import io.restassured.response.Response;
+import testdata.RequestSpecification;
 
-public class UserClient {
-    private final RestAssuredClient restAssuredClient;
-
-    public UserClient(RestAssuredClient restAssuredClient) {
-        this.restAssuredClient = restAssuredClient;
-    }
+public class UserClient extends RestAssuredClient {
 
     public Response create(UserDto userDto) {
-        return restAssuredClient.post("auth/register", userDto);
+        return post(RequestSpecification.regUser, userDto);
     }
+
     public boolean delete(String token) {
-        return restAssuredClient.delete(token, "auth/user")
+        return delete(token, RequestSpecification.authUser)
                 .then()
                 .assertThat()
                 .statusCode(202)
                 .extract()
                 .path("success");
     }
+
     public Response patch(String token, UserDto userDto) {
-        return restAssuredClient.patch(token, "auth/user", userDto);
+        return patch(token, RequestSpecification.authUser, userDto);
     }
 }

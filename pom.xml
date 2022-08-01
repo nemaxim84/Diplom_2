@@ -92,6 +92,7 @@
                     <reportVersion>2.15.0</reportVersion>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 

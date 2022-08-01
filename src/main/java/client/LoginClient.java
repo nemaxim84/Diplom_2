@@ -3,14 +3,10 @@ package client;
 import dto.LoginDto;
 
 import io.restassured.response.Response;
+import testdata.RequestSpecification;
 
-public class LoginClient {
-    private final RestAssuredClient restAssuredClient;
-
-    public LoginClient(RestAssuredClient restAssuredClient) {
-        this.restAssuredClient = restAssuredClient;
-    }
+public class LoginClient extends RestAssuredClient {
     public Response login(LoginDto loginDto) {
-        return restAssuredClient.post("auth/login", loginDto);
+        return post(RequestSpecification.login, loginDto);
     }
 }
