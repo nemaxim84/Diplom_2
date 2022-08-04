@@ -19,14 +19,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class GetOrdersTest {
-    static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private UserClient userClient;
     private String token;
     private UserDto userDto;
     private Response response;
     private OrderClient orderClient;
     private OrderDto orderDto;
-    private Response responseNew;
 
 
     @Before
@@ -35,23 +33,17 @@ public class GetOrdersTest {
         userDto=UserDto.createUserRandom();
         orderClient = new OrderClient();
         orderDto = new OrderDto();
+        response = userClient.create(userDto);
+        token = response.path("accessToken");
     }
     @After
     public void tearDown() throws Exception {
-        try {
-            userClient.delete(token.substring("Bearer ".length()));
-        } catch (Exception e){
-            logger.log(Level.WARNING,"Нет токена или пользователь не создавался");
-        }
+        userClient.delete(token.substring("Bearer ".length()));
     }
     @Test
     @DisplayName("Получение списка заказов у авторизированного пользователя")
     public void getOrderAuthUser() {
-
-        response = userClient.create(userDto);
-        token = response.path("accessToken");
-        responseNew = orderClient.get(token.substring("Bearer ".length()));
-        boolean isCreate = responseNew
+        boolean isCreate = orderClient.get(token.substring("Bearer ".length()))
                 .then().statusCode(SC_OK)
                 .extract()
                 .path("success");
@@ -60,8 +52,7 @@ public class GetOrdersTest {
     @Test
     @DisplayName("Получение списка заказов у неавторизированного пользователя")
     public void getOrderNotAuthUser() {
-        response = orderClient.get("");
-        boolean isCreate = response
+        boolean isCreate = orderClient.get("")
                 .then().statusCode(SC_UNAUTHORIZED)
                 .extract()
                 .path("success");

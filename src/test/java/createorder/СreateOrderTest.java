@@ -17,7 +17,7 @@ import java.util.List;
 import static org.apache.http.HttpStatus.*;
 import static org.junit.Assert.*;
 
-public class СreateOrderWithAuthTest {
+public class СreateOrderTest {
     private UserClient userClient;
     private String token;
     private UserDto userDto;

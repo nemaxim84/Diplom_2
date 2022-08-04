@@ -24,7 +24,6 @@ public class LoginUserTest {
     private Response response;
     private static LoginClient loginClient;
     private static LoginDto loginDto;
-    //private UserData userData = new UserData();
 
     @Before
     public void setUp() {

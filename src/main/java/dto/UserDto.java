@@ -7,10 +7,6 @@ public class UserDto {
     private static String email;
     private static String password;
 
-    public static UserDto createUser(){
-        Faker faker = new Faker();
-        return new UserDto(faker.name().toString(),faker.internet().emailAddress(),faker.internet().password());
-    }
 
     public UserDto(String name, String email, String password) {
         this.name = name;

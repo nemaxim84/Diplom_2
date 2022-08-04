@@ -40,6 +40,18 @@ public class CreateUserTest {
             logger.log(Level.WARNING, "Нет токена или пользователь не создавался");
         }
     }
+    @Test
+    @DisplayName("Создание пользователя со всеми пустыми полями и проверка, что он не создался")
+    public void createUserEmptyField() {
+        userDto = new UserDto(null,null,null);
+        response = userClient.create(userDto);
+        boolean isCreated = response
+                .then().statusCode(SC_FORBIDDEN)
+                .extract()
+                .path("success");
+        assertFalse(isCreated);
+        tokenNew = response.path("accessToken");
+    }
 
     @Test
     @DisplayName("Создание пользователя, который уже зарегестрирован, и проверка, что он не создался")
@@ -67,16 +79,5 @@ public class CreateUserTest {
         token = response.path("accessToken");
     }
 
-    @Test
-    @DisplayName("Создание пользователя со всеми пустыми полями и проверка, что он не создался")
-    public void createUserEmptyField() {
-        userDto = new UserDto(null, null, null);
-        response = userClient.create(userDto);
-        boolean isCreated = response
-                .then().statusCode(SC_FORBIDDEN)
-                .extract()
-                .path("success");
-        assertFalse(isCreated);
-        tokenNew = response.path("accessToken");
-    }
+
 }
