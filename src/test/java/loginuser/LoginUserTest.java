@@ -9,7 +9,6 @@ import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import testdata.UserData;
 
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
@@ -25,14 +24,12 @@ public class LoginUserTest {
     private Response response;
     private static LoginClient loginClient;
     private static LoginDto loginDto;
-    private UserData userData = new UserData();
+    //private UserData userData = new UserData();
 
     @Before
     public void setUp() {
-        email = userData.getEmail();
-        password = userData.getPassword();
         userClient = new UserClient();
-        userDto = new UserDto(userData.getName(),email,password);
+        userDto=UserDto.createUserRandom();
         response = userClient.create(userDto);
         token = response.path("accessToken");
         loginClient = new LoginClient();
@@ -46,7 +43,7 @@ public class LoginUserTest {
     @Test
     @DisplayName("Залогиниться пользователем существующим и проверка, что залогинился")
     public void loginUserValid() {
-        loginDto = new LoginDto(email, password);
+        loginDto = new LoginDto(userDto.getEmail(), userDto.getPassword());
         boolean isLogin = loginClient.login(loginDto)
                 .then().statusCode(SC_OK)
                 .extract()
@@ -56,7 +53,7 @@ public class LoginUserTest {
     @Test
     @DisplayName("Залогиниться пользователем не существующим логином и проверка, что не залогинился")
     public void loginUserNotValid() {
-        loginDto = new LoginDto(userData.getEmail(), password);
+        loginDto = new LoginDto(UserDto.createUserRandom().getEmail(), userDto.getPassword());
         boolean isLogin = loginClient.login(loginDto)
                 .then().statusCode(SC_UNAUTHORIZED)
                 .extract()

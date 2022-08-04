@@ -6,6 +6,8 @@ import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import testdata.Endpoints;
+
 import static io.restassured.RestAssured.given;
 
 public class RestAssuredClient {
@@ -13,8 +15,8 @@ public class RestAssuredClient {
             .addFilter(new AllureRestAssured())
             .log(LogDetail.ALL)
             .setContentType(ContentType.JSON)
-            .setBaseUri(testdata.RequestSpecification.baseUrl)
-            .setBasePath(testdata.RequestSpecification.basePath)
+            .setBaseUri(Endpoints.BASE_URL)
+            .setBasePath(Endpoints.BASE_PATH)
             .build();
 
     public RequestSpecification getRequestSpecification() {

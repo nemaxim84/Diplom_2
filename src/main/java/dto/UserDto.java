@@ -1,9 +1,16 @@
 package dto;
 
+import com.github.javafaker.Faker;
+
 public class UserDto {
-    private String name;
-    private String email;
-    private String password;
+    private static String name;
+    private static String email;
+    private static String password;
+
+    public static UserDto createUser(){
+        Faker faker = new Faker();
+        return new UserDto(faker.name().toString(),faker.internet().emailAddress(),faker.internet().password());
+    }
 
     public UserDto(String name, String email, String password) {
         this.name = name;
@@ -12,6 +19,10 @@ public class UserDto {
     }
 
     public UserDto() {
+    }
+    public static UserDto createUserRandom(){
+        Faker faker= new Faker();
+        return new UserDto(faker.name().name(),faker.internet().emailAddress(),faker.internet().password(7,20));
     }
 
     public String getName() {
@@ -36,14 +47,5 @@ public class UserDto {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "UserDto{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
     }
 }
