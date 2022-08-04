@@ -43,7 +43,7 @@ public class CreateUserTest {
     @Test
     @DisplayName("Создание пользователя со всеми пустыми полями и проверка, что он не создался")
     public void createUserEmptyField() {
-        userDto = new UserDto(null,null,null);
+        userDto = new UserDto();
         response = userClient.create(userDto);
         boolean isCreated = response
                 .then().statusCode(SC_FORBIDDEN)

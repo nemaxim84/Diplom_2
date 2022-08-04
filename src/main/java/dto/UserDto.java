@@ -3,9 +3,9 @@ package dto;
 import com.github.javafaker.Faker;
 
 public class UserDto {
-    private static String name;
-    private static String email;
-    private static String password;
+    private String name;
+    private  String email;
+    private  String password;
 
 
     public UserDto(String name, String email, String password) {
